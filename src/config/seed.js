@@ -4,39 +4,61 @@
  */
 
 const User = require('../api/users/users.model');
+const Accounts = require("../db/masterdb.model");
 
 const config = require('./environment/');
 
-module.exports = function seedDatabaseIfNeeded() {
+module.exports = async function seedDatabaseIfNeeded() {
   if (config.seedDB) {
-    User.find({}).remove()
-      .then(() => {
-        User.create(
-          {
-            provider: 'local',
-            name: 'Test User',
-            email: 'test@example.com',
-            password: 'test',
-            accountId: 'Egni_u001',
-          }, {
-            provider: 'local',
-            name: 'Test User',
-            email: 'test2@example.com',
-            password: 'test2',
-            accountId: 'Egni_u002',
-          },
-          {
-            provider: 'local',
-            role: 'admin',
-            name: 'Admin',
-            email: 'admin@example.com',
-            password: 'admin',
-            accountId: 'Egni_u001',
-
-          },
-        )
-          .then(() => console.info('finished populating users'))
-          .catch(err => console.error('error populating users', err));
-      });
+    await Accounts.remove({});
+    await Accounts.create([
+      {
+        "accountId" : "DMS_u001",
+        "accountName" : "Automate.io",
+        "uri" : {
+          "dms" : "mongodb://localhost:27017/automate-io"
+        },
+        "active" : true
+      },
+      {
+        "accountId" : "DMS_u002",
+        "accountName" : "test",
+        "uri" : {
+          "dms" : "mongodb://localhost:27017/test"
+        },
+        "active" : true
+      }
+      
+    ])
+    await User.remove();
+    await User.create([
+      {
+        provider: 'local',
+        name: 'Test User',
+        email: 'test@example.com',
+        password: 'test',
+        accountId: 'DMS_u001',
+        active: true,
+      }, {
+        provider: 'local',
+        name: 'Test User',
+        email: 'test2@example.com',
+        password: 'test2',
+        accountId: 'DMS_u002',
+        active: true,
+      },
+      {
+        provider: 'local',
+        role: 'admin',
+        name: 'Admin',
+        email: 'admin@example.com',
+        password: 'admin',
+        accountId: 'DMS_u001',
+        active: true,
+      }]
+    )
+    
+    console.log("Dummy Data Seed Done");
+    
   }
 }

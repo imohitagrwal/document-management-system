@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ConnectionSchema = new mongoose.Schema({
+const AccountSchema = new mongoose.Schema({
   accountId: { type: String, required: true },
   accountName: { type: String },
   uri: {
@@ -9,4 +9,4 @@ const ConnectionSchema = new mongoose.Schema({
   active: { type: Boolean, default: true },
 });
 
-module.exports.default = mongoose.connection.model('connections', ConnectionSchema);
+module.exports = mongoose.connection.model('accounts', AccountSchema);

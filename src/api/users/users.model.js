@@ -1,7 +1,3 @@
-
-
-/* eslint no-invalid-this:0 */
-
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 
@@ -34,7 +30,7 @@ const UserSchema = new mongoose.Schema({
   userId: { type: String },
   username: { type: String, required: false },
   imageUrl: { type: String },
-
+  active: { type: Boolean, default: true },
 });
 
 // Non-sensitive info we'll be putting in the token
@@ -42,7 +38,6 @@ UserSchema
   .virtual('token')
   .get(() => ({
     _id: this._id,
-    role: this.role,
   }));
 
 /**

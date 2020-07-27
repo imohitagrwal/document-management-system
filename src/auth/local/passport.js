@@ -1,5 +1,5 @@
-import passport from 'passport';
-import { Strategy as LocalStrategy } from 'passport-local';
+const passport = require('passport');
+const  LocalStrategy  = require('passport-local');
 
 /*
 Error Code list:
@@ -7,7 +7,6 @@ AU01 - Email mismatch
 AU02 - Password mismatch
 */
 function localAuthenticate(req, User, login, password, done) {
-  const hostnameForQuery = req.body.hostname ? req.body.hostname : '';
   // can login through both username and emailId
   login = login.trim();
   const email_lower = login.toLowerCase(); //eslint-disable-line
@@ -15,7 +14,6 @@ function localAuthenticate(req, User, login, password, done) {
   User.findOne({
     email: { $in: [email_lower, email_upper] }, //eslint-disable-line
     active: true,
-    hostname: hostnameForQuery,
   })
     .exec()
     .then(user => {
@@ -43,7 +41,7 @@ function localAuthenticate(req, User, login, password, done) {
     .catch(err => done(err));
 }
 
-module.exports.default = function setup(User /* config */) {
+module.exports = function setup(User /* config */) {
   passport.use(
     new LocalStrategy(
       {
@@ -56,3 +54,4 @@ module.exports.default = function setup(User /* config */) {
     ),
   );
 }
+

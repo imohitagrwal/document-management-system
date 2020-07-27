@@ -3,10 +3,15 @@ const passport = require('passport');
 
 const auth = require("../auth.service");
 
+const config  = require('../../config/environment');
+
+const User = require('../../api/users/users.model');
+require('./passport')(User, config);
 
 const router = express.Router();
 
 /* -------------------------------API ROUTES------------------------------------*/
+
 
 router.post('/', (req, res, next) => {
   passport.authenticate('local', async (err, user, info) => {
@@ -23,18 +28,11 @@ router.post('/', (req, res, next) => {
 
       const token = await auth.signToken(
         user._id, // eslint-disable-line
-        user.role,
         user.accountId,
-        user.hostname,
-        user.loginHash,
       );
-
       const returnJson = {
         token,
-        firstTimePasswordChanged: user.passwordChange,
-        redirectionLink: `https://${user.hostname}`,
       };
-
       return res.json(returnJson);
     } catch (error) {
       console.error(error);
@@ -43,4 +41,4 @@ router.post('/', (req, res, next) => {
   })(req, res, next);
 });
 
-module.exports.default = router;
+module.exports = router;

@@ -10,7 +10,7 @@ const utf8 = require('utf8');
 const CryptoJS = require('crypto-js');
 
 const validateJwt = expressJwt({
-  secret: config.secrets.session,algorithms: ['RS256']
+  secret: config.secrets.session,algorithms:["HS256"]
 });
 
 
@@ -56,17 +56,17 @@ function isAuthenticated() {
         validateJwt(req, res, next);
       })
       // Attach user to request
-      .use(async(req, res, next) => {// eslint-disable-line
-
+      .use((req, res, next) => {// eslint-disable-line
         if (!req.user || !req.user._id) {// eslint-disable-line
           res.statusMessage = 'User Data is Null';
           return res.status(401).end();
         }
-
+        
         const findUserQuery = {
           _id: req.user._id,  // eslint-disable-line
           active: true,
         };
+
         User.findOneAndUpdate(findUserQuery, {
           $set: { 'activityLogs.lastVisit': new Date() },
         })
@@ -75,35 +75,32 @@ function isAuthenticated() {
             if (!user) {
               return res.status(401).end();
             }
-
-            if (user.loginHash !== req.user.loginHash) {
-              res.statusMessage = 'User need to Login again';
-              return res.status(401).end();
-            }
-
             const userData = JSON.parse(JSON.stringify(user));
             delete req.authorization;
-              userData.token = {
-                authorization,
-                accesscontroltoken,
-              };
-              req.user = userData;
-              return next();
+            req.user = userData;
+            return next();
           })
           .catch(err => next(err));
       })
   );
 }
 
-async function signAccessControlToken(id, access) {
+
+/**
+ * Returns a jwt token signed by the app secret
+ */
+async function signToken(id, role, instituteId, hostname, loginHash) {
   let token = await jwt.sign(
     {
       _id: id,
-      access,
+      role,
+      instituteId,
+      hostname,
+      loginHash,
     },
     config.secrets.session,
     {
-      expiresIn: 60 * 60 * 24 * 365,
+      expiresIn: 60 * 60 * 24,
     },
   );
   if (config.encriptedToken) {
@@ -115,9 +112,7 @@ async function signAccessControlToken(id, access) {
   return utf8.decode(token);
 }
 
-
 module.exports = {
-  signAccessControlToken,
   isAuthenticated,
-  verifyJWTToken,
+  signToken,
 }

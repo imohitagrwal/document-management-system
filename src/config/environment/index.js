@@ -7,7 +7,7 @@ const all = {
   port: process.env.PORT || 3000,
 
   // Should we populate the DB with sample data?
-  seedDB: false,
+  seedDB: true,
 
   // DB Connection Cleanup Interval In minute
   timeInterval: process.env.DB_TTL || 10,

@@ -6,10 +6,10 @@
 */
 
 
-const express = require('express'); 
+const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const  config  = require('./config/environment');
+const config = require('./config/environment');
 const auth = require('./auth/auth.service');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -33,10 +33,15 @@ mongoose.connection.on('error', (err) => {
 const app = express();
 app.use(cors());
 app.use(morgan('short'));
-app.use(bodyParser.urlencoded({ extended: true, limit: '32mb' }));
-app.use(bodyParser.json({ limit: '32mb' }));
+app.use(bodyParser.urlencoded({
+  extended: true,
+  limit: '32mb'
+}));
+app.use(bodyParser.json({
+  limit: '32mb'
+}));
 
-app.use('/auth',login)
+app.use('/auth', login)
 
 app.use('/api', auth.isAuthenticated())
 require('./api').default(app);

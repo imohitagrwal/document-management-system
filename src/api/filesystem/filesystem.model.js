@@ -11,9 +11,10 @@ const mongoose = require('mongoose');
 const  getDB = require('../../db').getDB;
 
 const DirectorySchema = new mongoose.Schema({
-    parent : { type : String, required : true , index: true },
-    path : { type : String , default : null, required: true },
+    parent : { type : String, index: true, default: "/" },
+    path : { type : String , default : null, required: true, index: true},
     type : { type : String , required: true },
+    content: { type: String, default: ""},
     createdBy: { type : String, required: true}
 }, {
   timestamps: { createdAt: true, updatedAt: true }
@@ -23,6 +24,7 @@ const DirectorySchema = new mongoose.Schema({
 async function getModel(userCxt) {
   const { accountId } = userCxt;
   const db = await getDB(accountId);
+  // console.log(db)
   return db.model('directory', DirectorySchema);
 }
 
