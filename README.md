@@ -1,9 +1,9 @@
 # document-management-system
 A Document management system written using Nodejs and Mongodb  
 
-Prerequisite: docker and docker-compose.  
+# Prerequisite: docker and docker-compose.  
 
-Steps to run the application:  
+# Steps to run the application:  
 1) docker build -t dms .  
 2) docker pull mongo  
 3) docker-compose up -d  
@@ -16,7 +16,8 @@ If seed is set to true dummy data will be inserted to accounts collection and us
 
 Accounts collection maintain the account info like mongo tenant to connect to and users collection contains info like email, pasword and accountId to which user belongs to.  
 
-Dummy accounts data: [  
+# Dummy accounts data: 
+[  
       &nbsp;&nbsp;&nbsp;&nbsp;{  
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"accountId" : "DMS_u001",  
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"accountName" : "Automate.io",  
@@ -33,9 +34,10 @@ Dummy accounts data: [
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},  
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"active" : true  
       &nbsp;&nbsp;&nbsp;&nbsp;}  
-    &nbsp;&nbsp;&nbsp;&nbsp;]  
+    &nbsp;&nbsp;&nbsp;&nbsp;
+]  
   
-Dummy users data:  
+# Dummy users data:  
 &nbsp;&nbsp;&nbsp;&nbsp;[  
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{  
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider: 'local',  
@@ -67,7 +69,7 @@ Since I am not able to run mongo as replica set in docker, move api wont work, a
 
 I have kept only one schema for file and folders.  
 
-Mongo DB Schema:  
+# Mongo DB Schema:  
 
 
 directory: {  
@@ -111,4 +113,47 @@ users: {
 
 Users schema is part of tenantregistry where all the users from every accounts are kept.
 
+
+# API:  
+This service exposes in total of 5 APIs'.  
+
+1) Login: This api is responsible for loging user to the system.  
+Endoint: <host_name>/auth/  
+Method: POST  
+Payload: {"email":"----","password":"----"}  
+content-type: application/json  
+Info: email and password in the body are mandatory
+
+2) Mkdir: This api is responsible for creating folder.  
+Endpoint: <host_name>/api/filesystem/mv  
+Method: POST  
+Payload: { "path":"---" }  
+content-type: application/json  
+headers:  { authorization: "" }  
+Info: path is fully qualified path name should start with /.  
+
+3) ls: This api is responsible for listing the content of the present working directory.
+Endpoint: <host_name>/api/filesystem/mv  
+Method: POST  
+Payload: {path: "--", cmd: "--"}  
+content-type: application/json  
+headers: { authorization: "" }  
+Info: path defaults to / and cmd can be either file or folder defaults to both. cmd is just to filter out the result.  
+
+4) touch: This api is responsible for creating file.
+Endpoint: <host_name>/api/filesystem/touch  
+Method: POST  
+Payload: {path: "--", content: "--"}  
+content-type: application/json  
+headers: { authorization: "" }  
+Info: path is mandatory if wants to write at root pass path as "/"  , content is also mandatory.  
+
+
+4) mv: This api is responsible for moving file from one folder to other.
+Endpoint: <host_name>/api/filesystem/mv  
+Method: PUT  
+Payload: {filePath: "--", folderPath: "--"}  
+content-type: application/json  
+headers: { authorization: "" }  
+Info: Both filePath and folderPath are mandatory.    
 
