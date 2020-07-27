@@ -16,7 +16,7 @@ module.exports = async function seedDatabaseIfNeeded() {
         "accountId" : "DMS_u001",
         "accountName" : "Automate.io",
         "uri" : {
-          "dms" : "mongodb://localhost:27017/automate-io"
+          "dms" : `mongodb://mongo:27017/automate-io`
         },
         "active" : true
       },
@@ -24,11 +24,10 @@ module.exports = async function seedDatabaseIfNeeded() {
         "accountId" : "DMS_u002",
         "accountName" : "test",
         "uri" : {
-          "dms" : "mongodb://localhost:27017/test"
+          "dms" : "mongodb://mongo:27017/test"
         },
         "active" : true
       }
-      
     ])
     await User.remove();
     await User.create([

@@ -1,7 +1,7 @@
 FROM node:8.9.4
 
 ENV NODE_ENV=development
-ENV PORT=3000
+ENV PORT=8080
 # Set a working directory
 WORKDIR /usr/src/app
 
