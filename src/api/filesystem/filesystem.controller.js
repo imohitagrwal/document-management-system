@@ -31,11 +31,11 @@ async function mkdir(req, res) {
 async function ls(req, res){
     try{
         const FileSystemModel = await FileSystem.getModel(req.user);
-        const { path, cmd } = req.body;
+        let { path, cmd } = req.body;
         if(!path){
             path = "/"
         }
-        let query = {parent:path}
+        let query = {parent:path, createdBy: req.user._id}
         
         if (cmd == "file"){
             query["type"] = "file"
@@ -55,8 +55,12 @@ async function touch(req, res){
     try{
         const {content, path} = req.body;
         
-        if(!content || !path){
+        if(!content){
             return res.status(400).send("Bad Req.")
+        }
+
+        if(!path){
+            path = "/"
         }
 
         const FileSystemModel = await FileSystem.getModel(req.user);
@@ -83,20 +87,26 @@ async function mv(req, res){
     let session = await FileSystemModel.startSession();
     session.startTransaction();
     try{
-
         const opts = {session}
         const {filePath, folderPath} = req.body;
+        
+        if (!filePath || !folderPath){
+            return res.status(400).send("Bad Req.")
+        }
+        const userId = req.user._id
         const [file, folder] = await Promise.all([
-            FileSystemModel.findOne({path: filePath, type:"file"}),
-            FileSystemModel.findOne({path: folderPath, type:"folder"})
+            FileSystemModel.findOne({path: filePath, type:"file", createdBy: userId}),
+            FileSystemModel.findOne({path: folderPath, type:"folder", createdBy: userId})
         ])
+
         if(!file){
-            return res.status(400).send("File doesn't exist.")
+            return res.status(400).send("Invalid File.")
         }
 
         if(!folder){
-            return res.status(400).send("Folder doesn't exist.");
+            return res.status(400).send("Invalid Folder.");
         }
+
         const fileName = filePath.split("/").pop()
         const newFilePath = `${folderPath}/${fileName}`;
     
