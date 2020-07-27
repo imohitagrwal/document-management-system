@@ -17,49 +17,49 @@ If seed is set to true dummy data will be inserted to accounts collection and us
 Accounts collection maintain the account info like mongo tenant to connect to and users collection contains info like email, pasword and accountId to which user belongs to.  
 
 Dummy accounts data: [  
-      {  
-        "accountId" : "DMS_u001",  
-        "accountName" : "Automate.io",  
-        "uri" : {  
-          "dms" : `mongodb://mongo:27017/automate-io`  
-        },  
-        "active" : true  
-      },  
-      {  
-        "accountId" : "DMS_u002",  
-        "accountName" : "test",  
-        "uri" : {  
-          "dms" : "mongodb://mongo:27017/test"  
-        },  
-        "active" : true  
-      }  
-    ]  
+      &nbsp;&nbsp;&nbsp;&nbsp;{  
+        &nbsp;&nbsp;&nbsp;&nbsp;"accountId" : "DMS_u001",  
+        &nbsp;&nbsp;&nbsp;&nbsp;"accountName" : "Automate.io",  
+        &nbsp;&nbsp;&nbsp;&nbsp;"uri" : {  
+          &nbsp;&nbsp;&nbsp;&nbsp;"dms" : `mongodb://mongo:27017/automate-io`  
+        &nbsp;&nbsp;&nbsp;&nbsp;},  
+        &nbsp;&nbsp;&nbsp;&nbsp;"active" : true  
+      &nbsp;&nbsp;&nbsp;&nbsp;},  
+      &nbsp;&nbsp;&nbsp;&nbsp;{  
+        &nbsp;&nbsp;&nbsp;&nbsp;"accountId" : "DMS_u002",  
+        &nbsp;&nbsp;&nbsp;&nbsp;"accountName" : "test",  
+        &nbsp;&nbsp;&nbsp;&nbsp;"uri" : {  
+          &nbsp;&nbsp;&nbsp;&nbsp;"dms" : "mongodb://mongo:27017/test"  
+        &nbsp;&nbsp;&nbsp;&nbsp;},  
+        &nbsp;&nbsp;&nbsp;&nbsp;"active" : true  
+      &nbsp;&nbsp;&nbsp;&nbsp;}  
+    &nbsp;&nbsp;&nbsp;&nbsp;]  
   
 Dummy users data:  
-[  
-      {  
-        provider: 'local',  
-        name: 'Test User',  
-        email: 'test@example.com',  
-        password: 'test',  
-        accountId: 'DMS_u001',  
-        active: true,  
-      }, {  
-        provider: 'local',  
-        name: 'Test User',  
-        email: 'test2@example.com',  
-        password: 'test2',  
-        accountId: 'DMS_u002',  
-        active: true,  
-      },  
-      {  
-        provider: 'local',  
-        name: 'Admin',  
-        email: 'admin@example.com',  
-        password: 'admin',  
-        accountId: 'DMS_u001',  
-        active: true,  
-}]  
+&nbsp;&nbsp;&nbsp;&nbsp;[  
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider: 'local',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: 'Test User',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email: 'test@example.com',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: 'test',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accountId: 'DMS_u001',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: true,  
+      &nbsp;&nbsp;&nbsp;&nbsp;}, {  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider: 'local',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: 'Test User',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email: 'test2@example.com',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: 'test2',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accountId: 'DMS_u002',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: true,  
+      &nbsp;&nbsp;&nbsp;&nbsp;},  
+      &nbsp;&nbsp;&nbsp;&nbsp;{  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider: 'local',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: 'Admin',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;email: 'admin@example.com',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: 'admin',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;accountId: 'DMS_u001',  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;active: true,  
+&nbsp;&nbsp;&nbsp;&nbsp;}]  
 
 In mongo passwords are converted to its corresponding salt and hash.  
 
