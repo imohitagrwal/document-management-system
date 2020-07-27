@@ -18,20 +18,20 @@ Accounts collection maintain the account info like mongo tenant to connect to an
 
 Dummy accounts data: [  
       &nbsp;&nbsp;&nbsp;&nbsp;{  
-        &nbsp;&nbsp;&nbsp;&nbsp;"accountId" : "DMS_u001",  
-        &nbsp;&nbsp;&nbsp;&nbsp;"accountName" : "Automate.io",  
-        &nbsp;&nbsp;&nbsp;&nbsp;"uri" : {  
-          &nbsp;&nbsp;&nbsp;&nbsp;"dms" : `mongodb://mongo:27017/automate-io`  
-        &nbsp;&nbsp;&nbsp;&nbsp;},  
-        &nbsp;&nbsp;&nbsp;&nbsp;"active" : true  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"accountId" : "DMS_u001",  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"accountName" : "Automate.io",  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"uri" : {  
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"dms" : `mongodb://mongo:27017/automate-io`  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"active" : true  
       &nbsp;&nbsp;&nbsp;&nbsp;},  
       &nbsp;&nbsp;&nbsp;&nbsp;{  
-        &nbsp;&nbsp;&nbsp;&nbsp;"accountId" : "DMS_u002",  
-        &nbsp;&nbsp;&nbsp;&nbsp;"accountName" : "test",  
-        &nbsp;&nbsp;&nbsp;&nbsp;"uri" : {  
-          &nbsp;&nbsp;&nbsp;&nbsp;"dms" : "mongodb://mongo:27017/test"  
-        &nbsp;&nbsp;&nbsp;&nbsp;},  
-        &nbsp;&nbsp;&nbsp;&nbsp;"active" : true  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"accountId" : "DMS_u002",  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"accountName" : "test",  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"uri" : {  
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"dms" : "mongodb://mongo:27017/test"  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},  
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"active" : true  
       &nbsp;&nbsp;&nbsp;&nbsp;}  
     &nbsp;&nbsp;&nbsp;&nbsp;]  
   
