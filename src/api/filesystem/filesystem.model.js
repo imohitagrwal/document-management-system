@@ -12,7 +12,7 @@ const  getDB = require('../../db').getDB;
 
 const DirectorySchema = new mongoose.Schema({
     parent : { type : String, index: true, default: "/" },
-    path : { type : String , default : null, required: true, index: true},
+    path : { type : String , required: true, index: true},
     type : { type : String , required: true },
     content: { type: String, default: ""},
     createdBy: { type : String, required: true}
