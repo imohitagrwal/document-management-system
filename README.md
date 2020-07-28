@@ -130,7 +130,7 @@ Method: POST
 Payload: { "path":"---" }  
 content-type: application/json  
 headers:  { authorization: "" }  
-Info: path is fully qualified path name should start with /.  
+Info: path is fully qualified path name should start with /. e.g; "/xyz" or "/xyz/abc"  
 
 3) ls: This api is responsible for listing the content of the present working directory.
 Endpoint: <host_name>/api/filesystem/mv  
@@ -146,7 +146,7 @@ Method: POST
 Payload: {path: "--", content: "--"}  
 content-type: application/json  
 headers: { authorization: "" }  
-Info: path is mandatory if wants to write at root pass path as "/"  , content is also mandatory.  
+Info: path is mandatory if wants to write at root pass path as "/"  , content is also mandatory.  path e.g; "/xyz.txt" or "/abc/xyz.txt"  
 
 
 4) mv: This api is responsible for moving file from one folder to other.
